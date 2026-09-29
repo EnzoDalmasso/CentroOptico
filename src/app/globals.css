@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+/*
+ * Tokens de marca. Para adaptar el sitio a otro cliente alcanza con
+ * modificar estas variables (y las fuentes en `src/app/fonts.ts`).
+ */
+:root {
+  --brand-ivory: #f6f3ee;
+  --brand-paper: #fbfaf7;
+  --brand-sand: #ebe5da;
+  --brand-line: #ddd5c8;
+  --brand-ink: #161514;
+  --brand-charcoal: #2b2926;
+  --brand-muted: #69645c;
+  --brand-accent: #a07a4a;
+  --brand-accent-strong: #7c5c34;
+  --brand-accent-soft: #e9dcc8;
+
+  --header-height: 4.5rem;
+}
+
+@theme inline {
+  --color-ivory: var(--brand-ivory);
+  --color-paper: var(--brand-paper);
+  --color-sand: var(--brand-sand);
+  --color-line: var(--brand-line);
+  --color-ink: var(--brand-ink);
+  --color-charcoal: var(--brand-charcoal);
+  --color-muted: var(--brand-muted);
+  --color-accent: var(--brand-accent);
+  --color-accent-strong: var(--brand-accent-strong);
+  --color-accent-soft: var(--brand-accent-soft);
+
+  --font-sans: var(--font-brand-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-brand-serif), ui-serif, Georgia, serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-hero-in: hero-in 1.1s var(--ease-out-expo) both;
+  --animate-hero-zoom: hero-zoom 2.6s var(--ease-out-expo) both;
+  --animate-scroll-line: scroll-line 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  --animate-float-in: float-in 0.7s var(--ease-out-expo) 1.2s both;
+
+  @keyframes hero-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 28px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes hero-zoom {
+    from {
+      transform: scale(1.08);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes scroll-line {
+    0% {
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+    45% {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+    55% {
+      transform: scaleY(1);
+      transform-origin: bottom;
+    }
+    100% {
+      transform: scaleY(0);
+      transform-origin: bottom;
+    }
+  }
+
+  @keyframes float-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 16px, 0) scale(0.92);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-padding-top: var(--header-height);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--brand-ivory);
+    color: var(--brand-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--brand-accent-soft);
+    color: var(--brand-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brand-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@utility container-site {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 90rem;
+  padding-inline: 1.25rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+
+  @media (width >= 64rem) {
+    padding-inline: 3rem;
+  }
+}
+
+@utility eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
